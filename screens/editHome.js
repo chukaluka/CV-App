@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import React, {useState,  useContext} from 'react'
 import { PracticeContext } from '../Global/PracticeContext'
 
@@ -11,12 +11,18 @@ export default function EditHome({ navigation }) {
     const {
         fullName,
         setFullName, 
-        slackUsername, 
-        setSlackUsername,
-        githubHandle, 
-        setGithubHandle,
+        address, 
+        setAddress,
+        email,
+        setEmail,
+        education, 
+        setEducation,
         personalBio, 
-        setPersonalBio
+        setPersonalBio,
+        number, 
+        setNumber,
+        experience, 
+        setExperience
     } = useContext(PracticeContext);
 
 
@@ -26,57 +32,92 @@ export default function EditHome({ navigation }) {
 
   return (
     <TouchableWithoutFeedback onPress={() => {
-        Keyboard.dismiss();
-        }}>
-        <View style={styles.container}>
-        <View style={styles.firstView}>
-            <Text style={styles.firstText}>EDIT CV</Text>
-        </View>
-        
-        <View style={styles.secondContainer}>
-            <View style={styles.secondView}>
-                <Text style={styles.secondText}>full name</Text>
-                <TextInput
-                    style={styles.input}
-                    value={fullName}
-                    onChangeText={(text) => setFullName(text)}
-                />
-            </View>
-            <View style={styles.secondView}>
-                <Text style={styles.secondText}>slack username</Text>
-                <TextInput
-                    style={styles.input}
-                    value={slackUsername}
-                    onChangeText={(text) => setSlackUsername(text)}
-                />
-            </View>
-            <View style={styles.secondView}>
-                <Text style={styles.secondText}>github handle</Text>
-                <TextInput
-                    style={styles.input}
-                    value={githubHandle}
-                    onChangeText={(text) => setGithubHandle(text)}
-                />
-            </View>
-            <View style={styles.secondView}>
-                <Text style={styles.secondText}>personal bio</Text>
-                <TextInput
-                    style={styles.input}
-                    value={personalBio}
-                    multiline
-                    onChangeText={(text) => setPersonalBio(text)}
-                />
-            </View>
-        </View>
-        <View style={styles.buttonView}>
-            <TouchableOpacity 
-            style={styles.button}
-            onPress={pressHandler}
-            >
-                <Text style={styles.buttonText}>Done</Text>
-            </TouchableOpacity>
-        </View>
-        </View>
+            Keyboard.dismiss();
+            }}>
+        <KeyboardAvoidingView
+            style={{ flex: 1 }}
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            keyboardVerticalOffset={80}  // Adjust as needed
+        >
+            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                <View style={styles.container}>
+                <View style={styles.firstView}>
+                    <Text style={styles.firstText}>EDIT CV</Text>
+                </View>
+                
+                <View style={styles.secondContainer}>
+                    <View style={styles.secondView}>
+                        <Text style={styles.secondText}>full name</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={fullName}
+                            onChangeText={(text) => setFullName(text)}
+                        />
+                    </View>
+                    <View style={styles.secondView}>
+                        <Text style={styles.secondText}>address</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={address}
+                            onChangeText={(text) => setAddress(text)}
+                        />
+                    </View>
+                    <View style={styles.secondView}>
+                        <Text style={styles.secondText}>phone number</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={number}
+                            onChangeText={(text) => setNumber(text)}
+                            keyboardType='numeric'
+                        />
+                    </View>
+                    <View style={styles.secondView}>
+                        <Text style={styles.secondText}>Email</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={email}
+                            onChangeText={(text) => setEmail(text)}
+                        />
+                    </View>
+                    <View style={styles.secondView}>
+                        <Text style={styles.secondText}>personal bio</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={personalBio}
+                            multiline
+                            onChangeText={(text) => setPersonalBio(text)}
+                        />
+                    </View>
+                    <View style={styles.secondView}>
+                        <Text style={styles.secondText}>education / year</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={education}
+                            multiline
+                            onChangeText={(text) => setEducation(text)}
+                        />
+                    </View>
+                    <View style={styles.secondView}>
+                        <Text style={styles.secondText}>experience / year</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={experience}
+                            multiline
+                            onChangeText={(text) => setExperience(text)}
+                        />
+                    </View>
+                </View>
+                <View style={styles.buttonView}>
+                    <TouchableOpacity 
+                    style={styles.button}
+                    onPress={pressHandler}
+                    >
+                        <Text style={styles.buttonText}>Done</Text>
+                    </TouchableOpacity>
+                </View>
+                </View>
+            </ScrollView>
+        </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   )
 }
@@ -121,6 +162,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 5,
         marginTop: 40,
+        marginBottom: 40,
         alignItems: 'center',
         justifyContent: 'center',
         
