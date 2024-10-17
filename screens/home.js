@@ -15,12 +15,20 @@ export default function Home({ navigation }) {
         setEmail,
         education, 
         setEducation,
+        certificate,
+        setCertificate,
+        roles,
+        setRoles,
+        year,
+        setYear,
         personalBio, 
         setPersonalBio,
         number, 
         setNumber,
         experience, 
         setExperience,
+        experienceYear, 
+        setExperienceYear,
         generatePdf
     } = useContext(PracticeContext);
 
@@ -59,11 +67,13 @@ export default function Home({ navigation }) {
             </View>
             <View style={styles.secondView}>
                 <Text style={styles.secondText}>education / year</Text>
-                <Text style={styles.secondsubText}>{education}</Text>
+                <Text style={styles.secondsubText}>{education}      {year}</Text>
+                <Text style={styles.secondsubText}>{certificate}</Text>
             </View>
             <View style={styles.secondView}>
                 <Text style={styles.secondText}>experience / year</Text>
-                <Text style={styles.secondsubText}>{experience}</Text>
+                <Text style={styles.secondsubText}>{experience}       {experienceYear}</Text>
+                <Text style={styles.secondsubText}>{roles}</Text>
             </View>
         </View>
             <View style={styles.buttonView}>
